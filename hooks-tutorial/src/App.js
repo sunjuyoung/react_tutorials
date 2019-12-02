@@ -1,7 +1,8 @@
-import React ,{useState}from 'react';
+import React ,{useState} from 'react';
 import Counter from './Counter';
 import Info from './Info';
-import Average from './Average';
+import Average_useMemo from './Average_useMemo';
+import Average_useCallback from './Average_useCallback';
 
 
 const App = ()=> {
@@ -14,7 +15,7 @@ const App = ()=> {
 
     <div>
 
-      {visible ? <Average /> : null}
+      {visible ? <Average_useCallback /> : null}
       <hr></hr>
       <button onClick={()=>setVisible(!visible)}>{visible ? '보이기' : '숨기기'}</button>
     </div>
