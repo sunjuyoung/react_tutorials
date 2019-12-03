@@ -4,36 +4,30 @@ import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
 
-const App = ()=>{
-  const [todos, setTodos] = useState([
-
-    {
-      id:1,
-      text : '리액트 기초 1',
-      checked : true
-
-    },
-
-    {
-      id:2,
-      text : '컴포넌트 스타일링',
-      checked : true
-
-    },
-
-    {
-      id:3,
-      text : '일정관리 앱 ',
+//임의 데이터 2000
+function createBulkTodos(){
+  const array = [];
+  for(let i =1; i<2000; i++){
+    array.push({
+      id:i,
+      text: `할 일 ${i}`,
       checked : false
+    });
+  }
+  return array;
+}
 
-    },
 
-  ]);
+
+const App = ()=>{
+                                      //함수가 아닌 파라미터로 넘겨주면 처음렌더링 될 때만 함수가 실행된다
+  const [todos, setTodos] = useState(createBulkTodos);
 
 //고유값으로 사용될 id
 //ref를 사용하여 변수 담기
-const nextId = useRef(4);
+const nextId = useRef(1);
 
+//추가
 const onInsert = useCallback(
   text =>{
     const todo = {
@@ -41,16 +35,31 @@ const onInsert = useCallback(
       text,
       checked : false,
     };
-    setTodos(todos.concat(todo));
+    setTodos(todos=>todos.concat(todo));
     nextId.current += 1;
   },
-  [todos],
+  [],
 
 );
 
+//삭제
+const onRemove = useCallback(e=>{
+
+  setTodos(todos=>todos.filter(todo=> todo.id !== e));
+  
+},[]);
+
+
+//수정
+const onToggle = useCallback(id=>{
+  //map함수는 배열을 전체적으로 새로운 형태로 변환하여 새로운 배열을 생성
+  setTodos(todos=>todos.map(todo=>todo.id === id ? {...todo, checked : !todo.checked } : todo,))
+
+},[]);
+
   return <TodoTemplate>
             <TodoInsert onInsert={onInsert} />
-            <TodoList todos={todos} />
+            <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
         </TodoTemplate>
 
 
