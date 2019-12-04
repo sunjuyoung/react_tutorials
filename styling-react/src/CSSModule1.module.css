@@ -1,0 +1,12 @@
+.wrapper {
+    background : black;
+    color : white;
+    padding : 2rem;
+    
+}
+
+:global .something{
+
+    color: aqua;
+    font-weight: 600;
+}

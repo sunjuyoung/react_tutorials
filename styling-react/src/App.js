@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SassComponent from './SassComponent'
 import CSSModule from './CSSModule'
+import CSSModule1 from './CSSModule1'
 
 class App extends Component{
 
@@ -11,7 +12,7 @@ class App extends Component{
     return (
 
       <div>
-        <CSSModule />
+        <CSSModule1 />
 
 
       </div>
