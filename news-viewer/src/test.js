@@ -10,6 +10,9 @@ function increase(number,callback){
 increase(0,result =>{console.log(result)});
 
 
+
+
+
 function increase1(number){
     const promise = new Promise((resolve,reject) =>{
         //resolve는 성공 , reject 실패

@@ -1,24 +1,19 @@
-import React from 'react';
+import React,{useState,useCallback} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import NewsList from './components/NewsList';
+import Categories from './components/Categories';
 
 function App() {
+
+  const [category,setCategory] = useState('all');
+  const onSelect = useCallback(c=>setCategory(c),[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Categories category={category} onSelect={onSelect}></Categories>
+      <NewsList category={category}/>
     </div>
   );
 }
